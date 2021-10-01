@@ -144,7 +144,7 @@ export default function MiniDrawer() {
         </List></IconContext.Provider>
       </Drawer>
       <Divider />
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      <Box component="main" sx={{ flexGrow: 1, p: 3, alignItems: 'center' }}>
         <DrawerHeader />
             <div id='main'></div>
       </Box>
