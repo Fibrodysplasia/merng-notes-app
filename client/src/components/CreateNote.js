@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
+import axios from 'axios';
+
+import Notes from './Notes';
 
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import Divider from '@mui/material/Divider';
 import Container from '@mui/material/Container';
-import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 
@@ -46,6 +49,15 @@ function CreateNote() {
 
 function handleClick(event) {
     event.preventDefault();
+    console.log(input)
+    const newNote = {
+      notetitle: input.notetitle,
+      notebody: input.notebody,
+      noteid: Date.now()
+    }
+
+    axios.post('http://localhost:3001/create', newNote);
+    ReactDOM.render(<Notes/>, document.getElementById('main'));
 }
 
     return <><Container sx={{
@@ -72,12 +84,7 @@ function handleClick(event) {
             mt: '15px',
             p: '15px'
         }}>
-        <Box
-            component="form"
-            noValidate
-            sx={{
-            gap: 2,
-        }}>
+        
             <form id='note-form' style={{ 
                 display: 'flex',
                 flexDirection: 'column',
@@ -88,10 +95,10 @@ function handleClick(event) {
             <Typography variant='caption' display='block' gutterBottom>
                 *Required
             </Typography>
-            <Button variant='contained' type='reset' form='note-form' onClick={handleClick} >Submit</Button>
+            <Button variant='contained' type='submit' form='note-form' onClick={handleClick} >Submit</Button>
             </form>
 
-        </Box></Container>
+        </Container>
       
     </>
     
